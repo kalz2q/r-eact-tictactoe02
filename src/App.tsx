@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const status = "Next player: X";
 
-const RenderSquare = (i: number) => {
+const Square = (i: number) => {
   const [value, setValue] = useState("");
 
   return (
@@ -19,19 +19,19 @@ const board = () => {
     <div>
       <div className="status">{status}</div>
       <div className="board-row">
-        {RenderSquare(0)}
-        {RenderSquare(1)}
-        {RenderSquare(2)}
+        {Square(0)}
+        {Square(1)}
+        {Square(2)}
       </div>
       <div className="board-row">
-        {RenderSquare(4)}
-        {RenderSquare(5)}
-        {RenderSquare(6)}
+        {Square(4)}
+        {Square(5)}
+        {Square(6)}
       </div>
       <div className="board-row">
-        {RenderSquare(6)}
-        {RenderSquare(7)}
-        {RenderSquare(8)}
+        {Square(6)}
+        {Square(7)}
+        {Square(8)}
       </div>
     </div>
   );
