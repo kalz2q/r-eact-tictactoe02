@@ -4,15 +4,14 @@ import { useState } from "react";
 
 const status = "Next player: X";
 
-const RenderSquare = (i:number) => {
-  const [value, setValue] = useState('');
+const RenderSquare = (i: number) => {
+  const [value, setValue] = useState("");
 
   return (
-  <button className="square" onClick={()=> console.log('click')}>
-    {i}
+    <button className="square" onClick={() => setValue("X")}>
+      {value}
     </button>
-    )
-
+  );
 };
 
 const board = () => {
