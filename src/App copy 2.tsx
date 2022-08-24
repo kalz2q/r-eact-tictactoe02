@@ -4,25 +4,17 @@ import { useState } from "react";
 
 const status = "Next player: X";
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill("x"));
-  // const [squares, setSquares] = useState([]);
+const Square = (i: number) => {
+  const [value, setValue] = useState("");
 
-  const Square = (i: number) => {
-    const [value, setValue] = useState(squares[i]);
+  return (
+    <button className="square" onClick={() => setValue("X")}>
+      {value}
+    </button>
+  );
+};
 
-    const handleClick = (i: number) => {
-      const squares = squares.slice();
-      value = setValue("X");
-    };
-
-    return (
-      <button className="square" onClick={() => setValue("X")}>
-        {value}
-      </button>
-    );
-  };
-
+const board = () => {
   return (
     <div>
       <div className="status">{status}</div>
@@ -50,7 +42,7 @@ function App() {
     <div className="game">
       <div className="game-board">
         {/* <Board /> */}
-        {Board()}
+        {board()}
       </div>
       <div className="game-info">
         <div>{/* status */}</div>
