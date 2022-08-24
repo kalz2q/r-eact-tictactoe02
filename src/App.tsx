@@ -16,6 +16,25 @@ const Square = (i: number) => {
 
 const board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
+const Board = () => {
+  const [squares, setSquares] = useState(Array(9).fill("x"));
+  // const [squares, setSquares] = useState([]);
+
+  const Square = (i: number) => {
+    const [value, setValue] = useState(squares[i]);
+
+    const handleClick = (i: number) => {
+      const squares = squares.slice();
+      value = setValue("X");
+    };
+
+    return (
+      <button className="square" onClick={() => setValue("X")}>
+        {value}
+      </button>
+    );
+  };
+
   return (
     <div>
       <div className="status">{status}</div>
@@ -43,7 +62,7 @@ function App() {
     <div className="game">
       <div className="game-board">
         {/* <Board /> */}
-        {board()}
+        {Board()}
       </div>
       <div className="game-info">
         <div>{/* status */}</div>

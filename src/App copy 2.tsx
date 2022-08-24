@@ -10,6 +10,11 @@ const Square = (i: number) => {
   return (
     // <button className="square" onClick={() => setValue("X")}>
       {squares[i]}
+  const [value, setValue] = useState("");
+
+  return (
+    <button className="square" onClick={() => setValue("X")}>
+      {value}
     </button>
   );
 };
