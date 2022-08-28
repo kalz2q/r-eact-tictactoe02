@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 import "./App.css";
 
-const status = "Next player: X";
-
 type SquareState = "O" | "X" | "";
 
 type SquareProps = {
-  value: number;
-  // value: SquareState;
+  value: SquareState;
   onClick: () => void;
 };
 
 const Square = (props: SquareProps) => {
   return (
+    // <button className="square" onClick={props.onClick}>
     <button className="square" onClick={() => console.log("click")}>
       {props.value}
     </button>
   );
 };
 
-const renderSquare = (i: number) => {
-  // return <Square value="" onClick={() => onclick} />;
-  return <Square value={i} onClick={() => onclick} />;
-};
+// type BoardState = Repeat<SquareState, 9>
+type BoardState = [
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState,
+  SquareState
+];
 
 const Board = () => {
+  const status = "Next player: X";
+
+  const renderSquare = (i: number) => {
+    return <Square value="" onClick={() => onclick} />;
+  };
+
   return (
     <div>
       <div className="status">{status}</div>
@@ -47,18 +59,26 @@ const Board = () => {
   );
 };
 
+type Step = {
+  readonly squares: BoardState;
+  readonly xIsNext: boolean;
+};
+
+type GameState = {
+  readonly history: readonly Step[];
+  readonly stepNumber: number;
+};
+
 function App() {
-  const [squares, setSquares] = useState<string[]>([
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ]);
+  const [state, setState] = useState<GameState>({
+    history: [
+      {
+        squares: ["", "", "", "", "", "", "", "", ""],
+        xIsNext: true,
+      },
+    ],
+    stepNumber: 0,
+  });
 
   return (
     <div className="game">
