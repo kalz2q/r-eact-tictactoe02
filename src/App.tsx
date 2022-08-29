@@ -6,9 +6,18 @@ const status = "Next player: X";
 type SquareState = "O" | "X" | "";
 
 type SquareProps = {
-  // value: number;
   value: SquareState;
   onClick: () => void;
+};
+
+const Square = (props: SquareProps) => {
+  return (
+    // <button className="square" onClick={() => console.log("click")}>
+    <button className="square" onClick={props.onClick}>
+      {/* {props.value} */}
+      {"X"}
+    </button>
+  );
 };
 
 const Board = () => {
@@ -23,18 +32,6 @@ const Board = () => {
     "",
     "",
   ]);
-  const Square = (props: SquareProps) => {
-    return (
-      // <button className="square" onClick={() => console.log("click")}>
-      <button
-        className="square"
-        onClick={() => setSquares(["", "X", "", "X", "", "X", "", "X", ""])}
-      >
-        {/* {props.value} */}
-        {value}
-      </button>
-    );
-  };
 
   const renderSquare = (i: number) => {
     // return <Square value="" onClick={() => onclick} />;
