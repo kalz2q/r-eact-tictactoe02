@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 const Board = () => {
+  useEffect(() => {
+    document.title = "react-tictactoe02";
+  });
   const status = "Next player: X";
 
   const renderSquare = (i: number) => {
