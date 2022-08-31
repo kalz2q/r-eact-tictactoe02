@@ -1,24 +1,14 @@
 import React, { useEffect } from "react";
 import "./App.css";
 
-const status = "Next player: X";
-
-type SquareProps = {
-  value: number;
-};
-
-const Square = (props: SquareProps) => {
-  return <button className="square">{props.value}</button>;
-};
-
 const Board = () => {
   useEffect(() => {
     document.title = "react-tictactoe02";
   });
+  const status = "Next player: X";
 
   const renderSquare = (i: number) => {
-    // return <button className="square">{/* TODO */}</button>;
-    return <Square value={i} />;
+    return <button className="square">{/* TODO */}</button>;
   };
 
   return (
