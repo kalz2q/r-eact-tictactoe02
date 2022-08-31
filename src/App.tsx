@@ -35,6 +35,9 @@ const Board = () => {
 
   const handleClick = (i: number) => {
     const newSquares: SquareState[] = squares.slice();
+    if (calculateWinner(squares) || squares[i] !== "") {
+      return;
+    }
     newSquares[i] = xIsNext ? "X" : "O";
     setSquares(newSquares);
     setXIsNext(!xIsNext);
