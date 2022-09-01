@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
+// history の導入 
+// Board から App へのリフトアップ
 type SquareState = "O" | "X" | "";
 
 type SquareProps = {
@@ -16,22 +17,15 @@ const Square = (props: SquareProps) => {
   );
 };
 
-const Board = () => {
-  useEffect(() => {
-    document.title = "react-tictactoe02";
-  });
+type BoardProps = {
+  
+}
 
-  const [squares, setSquares] = useState<SquareState[]>(Array(9).fill(""));
-  const [xIsNext, setXIsNext] = useState<boolean>(true);
+const Board = (props: BoardProps) => {
+  // const [squares, setSquares] = useState<SquareState[]>(Array(9).fill(""));
+  // const [xIsNext, setXIsNext] = useState<boolean>(true);
 
-  // const status = "Next player: " + (xIsNext ? "X" : "O");
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = "Winner: " + winner;
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
-  }
+
 
   const handleClick = (i: number) => {
     const newSquares: SquareState[] = squares.slice();
@@ -47,6 +41,14 @@ const Board = () => {
   const renderSquare = (i: number) => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
   };
+
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
 
   return (
     <div>
@@ -77,6 +79,19 @@ const Board = () => {
 };
 
 function App() {
+  useEffect(() => {
+    document.title = "react-tictactoe";
+  });
+
+  const [state, setState] = useState({
+    history: [
+      {
+        squares: Array(9).fill(""),
+      },
+    ],
+    xIsNext: true,
+  });
+
   return (
     <div className="game">
       <div className="game-board">
