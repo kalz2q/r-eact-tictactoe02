@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-// history の導入 
-// Board から App へのリフトアップ
+// rewriting 08 because of useState
+
 type SquareState = "O" | "X" | "";
 
 type SquareProps = {
@@ -17,15 +17,36 @@ const Square = (props: SquareProps) => {
   );
 };
 
-type BoardProps = {
-  
+type BoardState = {
+  squares: [SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState],
+  xIsNext: boolean,
 }
 
-const Board = (props: BoardProps) => {
+
+
+const Board = () => {
+  useEffect(() => {
+    document.title = "react-tictactoe08=>09";
+  });
+
   // const [squares, setSquares] = useState<SquareState[]>(Array(9).fill(""));
   // const [xIsNext, setXIsNext] = useState<boolean>(true);
 
+const [state, setState] = useState <BoardState>({
+  squares: ["", "", "", "", "", "", "", "", ""],
+  xIsNext: true,
+}
+)
 
+
+  // const status = "Next player: " + (xIsNext ? "X" : "O");
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
 
   const handleClick = (i: number) => {
     const newSquares: SquareState[] = squares.slice();
@@ -41,14 +62,6 @@ const Board = (props: BoardProps) => {
   const renderSquare = (i: number) => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
   };
-
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = "Winner: " + winner;
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
-  }
 
   return (
     <div>
@@ -79,19 +92,6 @@ const Board = (props: BoardProps) => {
 };
 
 function App() {
-  useEffect(() => {
-    document.title = "react-tictactoe";
-  });
-
-  const [state, setState] = useState({
-    history: [
-      {
-        squares: Array(9).fill(""),
-      },
-    ],
-    xIsNext: true,
-  });
-
   return (
     <div className="game">
       <div className="game-board">
@@ -104,6 +104,8 @@ function App() {
     </div>
   );
 }
+
+// ========================================
 
 const calculateWinner = (squares: SquareState[]) => {
   const lines = [
@@ -124,4 +126,7 @@ const calculateWinner = (squares: SquareState[]) => {
   }
   return null;
 };
+
+// ========================================
+
 export default App;
