@@ -41,7 +41,8 @@ const Board = () => {
   // const [xIsNext, setXIsNext] = useState<boolean>(true);
 
   const [state, setState] = useState<BoardState>({
-    squares: ["", "", "", "", "", "", "", "", ""],
+    // squares: ["", "", "", "", "", "", "", "", ""],
+    squares: ["X", "X", "X", "X", "X", "X", "X", "X", "X"],
     xIsNext: true,
   });
 
@@ -55,7 +56,8 @@ const Board = () => {
   }
 
   const handleClick = (i: number) => {
-    const newSquares: SquareState[] = state.squares.slice();
+    const newSquares = state.squares.slice();
+
     if (calculateWinner(state.squares) || state.squares[i] !== "") {
       return;
     }
