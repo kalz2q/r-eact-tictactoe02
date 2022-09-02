@@ -18,11 +18,19 @@ const Square = (props: SquareProps) => {
 };
 
 type BoardState = {
-  squares: [SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState],
-  xIsNext: boolean,
-}
-
-
+  squares: [
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState,
+    SquareState
+  ];
+  xIsNext: boolean;
+};
 
 const Board = () => {
   useEffect(() => {
@@ -32,31 +40,30 @@ const Board = () => {
   // const [squares, setSquares] = useState<SquareState[]>(Array(9).fill(""));
   // const [xIsNext, setXIsNext] = useState<boolean>(true);
 
-const [state, setState] = useState <BoardState>({
-  squares: ["", "", "", "", "", "", "", "", ""],
-  xIsNext: true,
-}
-)
-
+  const [state, setState] = useState<BoardState>({
+    squares: ["", "", "", "", "", "", "", "", ""],
+    xIsNext: true,
+  });
 
   // const status = "Next player: " + (xIsNext ? "X" : "O");
-  const winner = calculateWinner(squares);
+  const winner = calculateWinner(state.squares);
   let status;
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next player: " + (state.xIsNext ? "X" : "O");
   }
 
   const handleClick = (i: number) => {
-    const newSquares: SquareState[] = squares.slice();
-    if (calculateWinner(squares) || squares[i] !== "") {
+    const newSquares: SquareState[] = state.squares.slice();
+    if (calculateWinner(state.squares) || state.squares[i] !== "") {
       return;
     }
-    newSquares[i] = xIsNext ? "X" : "O";
-    setSquares(newSquares);
-    setXIsNext(!xIsNext);
-    console.log(squares);
+    newSquares[i] = state.xIsNext ? "X" : "O";
+    // setSquares(newSquares);
+    // setXIsNext(!xIsNext);
+    setState({ squares: newSquares, xIsNext: !state.xIsNext });
+    // console.log(squares);
   };
 
   const renderSquare = (i: number) => {
