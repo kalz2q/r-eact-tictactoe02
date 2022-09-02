@@ -43,7 +43,7 @@ const Board = () => {
   });
 
   const winner = calculateWinner(state.squares);
-  let status;
+  let status: string;
   if (winner) {
     status = "Winner: " + winner;
   } else {
@@ -68,6 +68,7 @@ const Board = () => {
     });
 
     if (calculateWinner(state.squares) || state.squares[i] !== "") {
+      console.log(state.squares);
       return;
     }
     newSquares[i] = state.xIsNext ? "X" : "O";
