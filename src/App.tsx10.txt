@@ -1,4 +1,5 @@
-// display history
+// lift up states to App function from Board funciton
+// rewrite BoardState because of xIsNext
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
