@@ -1,6 +1,7 @@
+// lift up states to App function from Board funciton
 import React, { useState, useEffect } from "react";
 import "./App.css";
-// rewriting 08 because of useState
+
 
 type SquareState = "O" | "X" | "";
 
@@ -33,14 +34,7 @@ type BoardState = {
 };
 
 const Board = () => {
-  useEffect(() => {
-    document.title = "react-tictactoe08=>09";
-  });
 
-  const [state, setState] = useState<BoardState>({
-    squares: ["", "", "", "", "", "", "", "", ""],
-    xIsNext: true,
-  });
 
   const winner = calculateWinner(state.squares);
   let status: string;
@@ -107,7 +101,23 @@ const Board = () => {
   );
 };
 
+type GameState = {
+   history:  Step[],
+   xIsNext: boolean,
+}
+
 function App() {
+  useEffect(() => {
+    document.title = "react-tictactoe-liftup";
+  });
+
+  const [state, setState] = useState<BoardState>({
+    history: [{
+      squares: ["", "", "", "", "", "", "", "", ""],
+    }],
+    xIsNext: true,
+  });
+
   return (
     <div className="game">
       <div className="game-board">
