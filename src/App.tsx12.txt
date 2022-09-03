@@ -1,4 +1,5 @@
-// display history
+// add key to list
+// next is  timetravel (last)
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
@@ -126,19 +127,18 @@ const App = () => {
   const current = history[history.length - 1];
   const winner = calculateWinner(current.squares);
 
-  // const jumpTo = (move: number) => {
-  //   setState((prev) => ({
-  //     ...prev,
-  //     stepNumber: move,
-  //   }));
-  // };
+  const jumpTo = (move: number) => {
+    setState((prev) => ({
+      ...prev,
+      stepNumber: move,
+    }));
+  };
 
   const moves = history.map((step, move) => {
     const desc = move ? "Go to move #" + move : "Go to game start";
     return (
-      <li>
-        {/* <button onClick={() => jumpTo(move)}>{desc}</button> */}
-        <button>{desc}</button>
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{desc}</button>
       </li>
     );
   });
